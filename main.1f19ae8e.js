@@ -20982,6 +20982,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -21132,7 +21144,8 @@ function show_options() {
 
 function _show_options() {
   _show_options = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var response, variants, i, variant, name, options;
+    var response, variants, _i, _Object$entries, _Object$entries$_i, key, value, options;
+
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -21148,29 +21161,23 @@ function _show_options() {
             /*const response = {
                 user: "Nik",
                 question: "What is your transport?",
-                variants: [
-                    {
-                        name: "bike",
-                        text: "Bike"
-                    },
-                    {
-                        name: "car",
-                        text: "Car"
-                    }
-                ]
+                variants: {
+                    "bike": "Bike",
+                    "car": "Car"
+                }
             }; */
             variants = '';
+            window.console.log(response.variants); //for (var i = 0; i < response.variants.length; i++) {
 
-            for (i = 0; i < response.variants.length; i++) {
-              variant = response.variants[i];
-              name = variant.name;
-              variants += '<input type="checkbox" id="' + name + '" value="' + name + '">' + '<label for="' + name + '">' + variant.text + '</label><br>';
+            for (_i = 0, _Object$entries = Object.entries(response.variants); _i < _Object$entries.length; _i++) {
+              _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
+              variants += '<input type="checkbox" id="' + key + '" value="' + key + '">' + '<label for="' + name + '">' + value + '</label><br>';
             }
 
             options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + response.user + " please vote on <br/><b>" + response.question + "</b>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
-          case 7:
+          case 8:
           case "end":
             return _context4.stop();
         }
@@ -21239,7 +21246,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59345" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60248" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
