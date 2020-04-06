@@ -21166,18 +21166,17 @@ function _show_options() {
                     "car": "Car"
                 }
             }; */
-            variants = '';
-            window.console.log(response.variants); //for (var i = 0; i < response.variants.length; i++) {
+            variants = ''; // TODO: maybe use older ES syntax?
 
             for (_i = 0, _Object$entries = Object.entries(response.variants); _i < _Object$entries.length; _i++) {
               _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
               variants += '<input type="checkbox" id="' + key + '" value="' + key + '">' + '<label for="' + name + '">' + value + '</label><br>';
             }
 
-            options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + response.user + " please vote on <br/><b>" + response.question + "</b>" + '</legend>' + variants + '</fieldset>' + '</form>';
+            options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + response.user + " please vote on <br/>" + '<div style="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
-          case 8:
+          case 7:
           case "end":
             return _context4.stop();
         }
@@ -21246,7 +21245,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60248" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51641" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
