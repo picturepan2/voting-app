@@ -21106,36 +21106,8 @@ function signedInFlow() {
   }); // Adding an event to change greeting button.
 
   document.getElementById('vote-button').addEventListener('click', function () {
-    vote_submit();
+    vote();
   });
-}
-
-function vote() {
-  return _vote.apply(this, arguments);
-}
-
-function _vote() {
-  _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.next = 2;
-            return window.contract.vote({
-              option: ''
-            });
-
-          case 2:
-            show_options();
-
-          case 3:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-  return _vote.apply(this, arguments);
 }
 
 function show_options() {
@@ -21143,20 +21115,20 @@ function show_options() {
 }
 
 function _show_options() {
-  _show_options = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+  _show_options = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
     var response, variants, _i, _Object$entries, _Object$entries$_i, key, value, options;
 
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            _context4.next = 2;
+            _context3.next = 2;
             return window.contract.show_options({
               account_id: window.accountId
             });
 
           case 2:
-            response = _context4.sent;
+            response = _context3.sent;
 
             /*const response = {
                 user: "Nik",
@@ -21178,42 +21150,53 @@ function _show_options() {
 
           case 7:
           case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _show_options.apply(this, arguments);
+}
+
+function vote() {
+  return _vote.apply(this, arguments);
+} // Loads nearlib and this contract into window scope.
+
+
+function _vote() {
+  _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var voteForm, variants, result, i, variant, answer;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            voteForm = document.getElementById('voteForm');
+            variants = voteForm.getElementsByTagName("input");
+            result = {
+              user: window.accountId,
+              answers: []
+            };
+
+            for (i = 0; i < variants.length; i++) {
+              variant = variants[i];
+              answer = {
+                id: variant.id,
+                checked: variant.checked
+              }; //window.console.log(variant.id + " " + variant.checked);
+
+              result.answers.push(answer);
+            }
+
+            window.contract.vote(result);
+
+          case 5:
+          case "end":
             return _context4.stop();
         }
       }
     }, _callee4);
   }));
-  return _show_options.apply(this, arguments);
-}
-
-function vote_submit() {
-  return _vote_submit.apply(this, arguments);
-} // Loads nearlib and this contract into window scope.
-
-
-function _vote_submit() {
-  _vote_submit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-    var voteForm, variants, i, variant;
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            voteForm = document.getElementById('voteForm');
-            variants = voteForm.getElementsByTagName("input");
-
-            for (i = 0; i < variants.length; i++) {
-              variant = variants[i];
-              window.console.log(variant.id + " " + variant.checked);
-            }
-
-          case 3:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5);
-  }));
-  return _vote_submit.apply(this, arguments);
+  return _vote.apply(this, arguments);
 }
 
 window.nearInitPromise = InitContract().then(doWork).catch(console.error);
