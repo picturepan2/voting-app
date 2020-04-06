@@ -21173,7 +21173,7 @@ function _show_options() {
               variants += '<input type="checkbox" id="' + key + '" value="' + key + '">' + '<label for="' + name + '">' + value + '</label><br>';
             }
 
-            options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + response.user + " please vote on <br/>" + '<div style="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
+            options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + response.user + " please vote on <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
           case 7:
