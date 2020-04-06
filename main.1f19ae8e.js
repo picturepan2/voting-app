@@ -20902,7 +20902,7 @@ const wallet_account_1 = require("./wallet-account");
 exports.WalletAccount = wallet_account_1.WalletAccount;
 
 },{"./providers":"../node_modules/nearlib/lib/providers/index.js","./utils":"../node_modules/nearlib/lib/utils/index.js","./key_stores":"../node_modules/nearlib/lib/key_stores/index.js","./transaction":"../node_modules/nearlib/lib/transaction.js","./account":"../node_modules/nearlib/lib/account.js","./account_creator":"../node_modules/nearlib/lib/account_creator.js","./connection":"../node_modules/nearlib/lib/connection.js","./signer":"../node_modules/nearlib/lib/signer.js","./contract":"../node_modules/nearlib/lib/contract.js","./utils/key_pair":"../node_modules/nearlib/lib/utils/key_pair.js","./near":"../node_modules/nearlib/lib/near.js","./wallet-account":"../node_modules/nearlib/lib/wallet-account.js"}],"config.js":[function(require,module,exports) {
-var CONTRACT_NAME = "dev-1586094679272" || 'votingapp.nikolay';
+var CONTRACT_NAME = "dev-1586193068694" || 'votingapp.nikolay';
 
 function getConfig(env) {
   switch (env) {
@@ -20938,7 +20938,7 @@ function getConfig(env) {
       return {
         networkId: 'local',
         nodeUrl: 'http://localhost:3030',
-        keyPath: "".concat("/Users/igotti", "/.near/validator_key.json"),
+        keyPath: "".concat("/Users/nike", "/.near/validator_key.json"),
         walletUrl: 'http://localhost:4000/wallet',
         contractName: CONTRACT_NAME
       };
@@ -21228,7 +21228,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51641" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52857" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
