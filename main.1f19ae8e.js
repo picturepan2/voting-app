@@ -21176,7 +21176,7 @@ function _create_poll() {
           case 0:
             window.console.log("create_poll called");
             newPollForm = document.getElementById('new-poll-form');
-            question = newPollForm.getElementById("question").value;
+            question = newPollForm.childNodes.item("question").value;
             v1 = newPollForm.childNodes.item("v1").value;
             v2 = newPollForm.childNodes.item("v2").value;
             v3 = newPollForm.childNodes.item("v3").value;
