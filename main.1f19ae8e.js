@@ -21107,6 +21107,13 @@ function signedInFlow() {
   document.getElementById('create-poll-button').addEventListener('click', function () {
     show_create_poll();
   });
+  document.getElementById('create-poll-submit').addEventListener('click', function () {
+    create_poll();
+  });
+  document.getElementById('create-poll-submit').addEventListener('click', function () {
+    // TODO: clear state?
+    hide_create_poll();
+  });
 }
 
 function show_poll() {
@@ -21157,10 +21164,6 @@ function _show_poll() {
 }
 
 function create_poll() {
-  alert("HII");
-}
-
-function create_poll1() {
   return _create_poll.apply(this, arguments);
 }
 
