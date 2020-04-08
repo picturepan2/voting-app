@@ -20996,6 +20996,7 @@ function InitContract() {
 
 function _InitContract() {
   _InitContract = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var query, pollId;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -21016,27 +21017,29 @@ function _InitContract() {
             window.walletAccount = new nearlib.WalletAccount(window.near); // Getting the Account ID. If unauthorized yet, it's just empty string.
 
             window.accountId = window.walletAccount.getAccountId();
+            query = new URLSearchParams(window.location.search);
+            pollId = query.get('poll_id');
             window.voteState = {
               voteOwner: window.accountId,
-              pollId: 'UNDEFINED'
+              pollId: pollId
             }; // Initializing our contract APIs by contract name and configuration.
 
-            _context.next = 9;
+            _context.next = 11;
             return near.loadContract(nearConfig.contractName, {
               // eslint-disable-line require-atomic-updates
               // NOTE: This configuration only needed while NEAR is still in development
               // View methods are read only. They don't modify the state, but usually return some value.
-              viewMethods: ['show_poll'],
+              viewMethods: ['show_poll', 'ping'],
               // Change methods can modify the state. But you don't receive the returned value when called.
-              changeMethods: ['vote', 'create_poll', 'ping'],
+              changeMethods: ['vote', 'create_poll'],
               // Sender is the account ID to initialize transactions.
               sender: window.accountId
             });
 
-          case 9:
+          case 11:
             window.contract = _context.sent;
 
-          case 10:
+          case 12:
           case "end":
             return _context.stop();
         }
@@ -21089,7 +21092,7 @@ function signedOutFlow() {
 function signedInFlow() {
   // Displaying the signed in flow container.
   document.getElementById('signed-in-flow').classList.remove('d-none');
-  show_poll(); // Adding an event to a sign-out button.
+  if (window.voteState.pollId != '') show_poll(); // Adding an event to a sign-out button.
 
   document.getElementById('sign-out-button').addEventListener('click', function () {
     walletAccount.signOut(); // Forcing redirect.
@@ -21151,22 +21154,34 @@ function create_poll() {
 
 function _create_poll() {
   _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var newPollForm, question, v1, v2, v3, poll, base;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.t0 = window.console;
-            _context4.next = 3;
-            return window.contract.ping();
+            newPollForm = document.getElementById('new-poll-form');
+            question = newPollForm.getElementById("question").value;
+            v1 = newPollForm.getElementById("v1").value;
+            v2 = newPollForm.getElementById("v1").value;
+            v3 = newPollForm.getElementById("v1").value;
+            _context4.next = 7;
+            return window.contract.create_poll({
+              question: question,
+              variants: {
+                v1: v1,
+                v2: v2,
+                v3: v3
+              }
+            });
 
-          case 3:
-            _context4.t1 = _context4.sent;
-
-            _context4.t0.log.call(_context4.t0, _context4.t1);
-
+          case 7:
+            poll = _context4.sent;
+            window.console.log("poll is " + poll);
+            base = document.baseURI;
+            alert("poll is at " + base + "?" + poll);
             hide_create_poll();
 
-          case 6:
+          case 12:
           case "end":
             return _context4.stop();
         }
@@ -21174,18 +21189,6 @@ function _create_poll() {
     }, _callee4);
   }));
   return _create_poll.apply(this, arguments);
-}
-
-function show_create_poll() {
-  var newPollForm = document.getElementById('new-poll-form');
-  window.console.log(newPollForm);
-  newPollForm.style.display = 'block';
-}
-
-function hide_create_poll() {
-  var newPollForm = document.getElementById('new-poll-form');
-  window.console.log(newPollForm);
-  newPollForm.style.display = 'none';
 }
 
 function vote() {
@@ -21225,6 +21228,16 @@ function _vote() {
 }
 
 window.nearInitPromise = InitContract().then(doWork).catch(console.error);
+
+function show_create_poll() {
+  var newPollForm = document.getElementById('new-poll-form');
+  newPollForm.style.display = 'block';
+}
+
+function hide_create_poll() {
+  var newPollForm = document.getElementById('new-poll-form');
+  newPollForm.style.display = 'none';
+}
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
