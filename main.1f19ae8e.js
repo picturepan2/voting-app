@@ -21092,7 +21092,7 @@ function signedOutFlow() {
 function signedInFlow() {
   // Displaying the signed in flow container.
   document.getElementById('signed-in-flow').classList.remove('d-none');
-  if (window.voteState.pollId != '') show_poll(); // Adding an event to a sign-out button.
+  show_poll(); // Adding an event to a sign-out button.
 
   document.getElementById('sign-out-button').addEventListener('click', function () {
     walletAccount.signOut(); // Forcing redirect.
@@ -21120,14 +21120,22 @@ function _show_poll() {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            _context3.next = 2;
+            if (window.voteState.pollId) {
+              _context3.next = 2;
+              break;
+            }
+
+            return _context3.abrupt("return");
+
+          case 2:
+            window.console.log(window.voteState.pollId);
+            _context3.next = 5;
             return window.contract.show_poll({
               poll_id: window.voteState.pollId
             });
 
-          case 2:
+          case 5:
             response = _context3.sent;
-            //window.console.log(response);
             variants = '';
 
             for (index = 0; index < response.variants.length; index++) {
@@ -21138,7 +21146,7 @@ function _show_poll() {
             options = '<form id="vote-form">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
-          case 7:
+          case 10:
           case "end":
             return _context3.stop();
         }
