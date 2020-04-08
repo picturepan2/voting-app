@@ -24595,7 +24595,7 @@ function _show_poll() {
             }
 
             options = '<form id="vote-form">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
-            document.getElementById('vote_options').innerHTML = options;
+            document.getElementById('vote-options').innerHTML = options;
             document.getElementById('vote-button').style.display = 'inline';
             document.getElementById('show-results-button').style.display = 'inline';
 
@@ -24607,6 +24607,10 @@ function _show_poll() {
     }, _callee3);
   }));
   return _show_poll.apply(this, arguments);
+}
+
+function format_variant(poll, results, index) {
+  return poll.variants[index].message + ' -> ' + results.variants[poll.variants[index].option_id];
 }
 
 function show_vote_results() {
@@ -24636,18 +24640,22 @@ function _show_vote_results() {
           case 4:
             response = _context4.sent;
 
-            if (!(response.pollId == 'INVALID')) {
-              _context4.next = 8;
+            if (response.pollId) {
+              _context4.next = 7;
               break;
             }
 
-            alert('No such poll!');
             return _context4.abrupt("return");
 
-          case 8:
-            window.console.log(response);
+          case 7:
+            document.getElementById('show-poll-results').style.display = 'block';
+            document.getElementById('result-poll-question').innerText = response.poll.question;
+            document.getElementById('result-poll-v1').innerText = format_variant(response.poll, response.results, 0);
+            document.getElementById('result-poll-v2').innerText = format_variant(response.poll, response.results, 1);
+            document.getElementById('result-poll-v3').innerText = format_variant(response.poll, response.results, 2);
+            document.getElementById('result-poll-voted').innerText = response.results.voted.size;
 
-          case 9:
+          case 13:
           case "end":
             return _context4.stop();
         }
@@ -24671,7 +24679,8 @@ function _create_poll() {
             question = document.getElementById("new-poll-question").value;
             v1 = document.getElementById("new-poll-v1").value;
             v2 = document.getElementById("new-poll-v2").value;
-            v3 = document.getElementById("new-poll-v3").value;
+            v3 = document.getElementById("new-poll-v3").value; // Creation of poll and voting need more gas to execute.
+
             _context5.next = 6;
             return window.contract.create_poll({
               question: question,
@@ -24719,7 +24728,8 @@ function _vote() {
             for (i = 0; i < variants.length; i++) {
               variant = variants[i];
               votes[variant.id] = variant.checked ? 1 : 0;
-            }
+            } // Creation of poll and voting need more gas to execute.
+
 
             _context6.next = 6;
             return window.contract.vote({
