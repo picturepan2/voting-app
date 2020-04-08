@@ -21112,7 +21112,7 @@ function show_poll() {
 
 function _show_poll() {
   _show_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var response, variants, v, options;
+    var response, variants, index, v, options;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
