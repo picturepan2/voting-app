@@ -21188,14 +21188,11 @@ function _vote() {
           case 0:
             voteForm = document.getElementById('voteForm');
             variants = voteForm.getElementsByTagName('input');
-            votes = {
-              user: window.accountId,
-              answers: []
-            };
+            votes = {};
 
             for (i = 0; i < variants.length; i++) {
               variant = variants[i];
-              votes.answers[variant.id] = variant.checked ? 1 : 0;
+              votes[variant.id] = variant.checked ? 1 : 0;
             }
 
             window.contract.vote({
