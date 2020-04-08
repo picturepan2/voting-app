@@ -21113,7 +21113,7 @@ function signedInFlow() {
     create_poll();
   });
   document.getElementById('create-poll-cancel').addEventListener('click', function () {
-    // TODO: clear state?
+    // TODO: clear state in form?
     hide_create_poll();
   });
 }
@@ -21248,7 +21248,7 @@ function _create_poll() {
                 v2: v2,
                 v3: v3
               }
-            });
+            }, new BigNumber('1e16'));
 
           case 6:
             poll = _context5.sent;
