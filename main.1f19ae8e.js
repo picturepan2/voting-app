@@ -21169,7 +21169,7 @@ function create_poll() {
 
 function _create_poll() {
   _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var question, v1, v2, v3, poll, base;
+    var question, v1, v2, v3, poll, base, poll_address;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -21201,10 +21201,12 @@ function _create_poll() {
             poll = _context4.sent;
             window.console.log("poll is " + poll);
             base = document.baseURI;
-            alert("poll is at " + base + poll);
+            poll_address = base + poll;
+            document.getElementById("new-poll-address").innerHTML = '<a href="' + poll_address + '">' + poll_address + '</a>';
+            alert("poll is at " + poll_address);
             hide_create_poll();
 
-          case 13:
+          case 15:
           case "end":
             return _context4.stop();
         }
