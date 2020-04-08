@@ -21180,7 +21180,15 @@ function _create_poll() {
             v1 = newPollForm.childNodes.item("v1").value;
             v2 = newPollForm.childNodes.item("v2").value;
             v3 = newPollForm.childNodes.item("v3").value;
-            _context4.next = 8;
+            window.console.log({
+              question: question,
+              variants: {
+                v1: v1,
+                v2: v2,
+                v3: v3
+              }
+            });
+            _context4.next = 9;
             return window.contract.create_poll({
               question: question,
               variants: {
@@ -21190,14 +21198,14 @@ function _create_poll() {
               }
             });
 
-          case 8:
+          case 9:
             poll = _context4.sent;
             window.console.log("poll is " + poll);
             base = document.baseURI;
             alert("poll is at " + base + "?" + poll);
             hide_create_poll();
 
-          case 13:
+          case 14:
           case "end":
             return _context4.stop();
         }
