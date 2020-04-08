@@ -21132,7 +21132,7 @@ function _show_poll() {
               variants += '<input type="checkbox" id="' + v.option_id + '" value="' + v.option_id + '">' + '<label for="' + v.option_id + '">' + v.message + '</label><br>';
             }
 
-            options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
+            options = '<form id="vote-form">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
           case 7:
@@ -21151,16 +21151,22 @@ function create_poll() {
 
 function _create_poll() {
   _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var newPollForm;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            //window.console.log(await window.contract.ping())
-            newPollForm = document.getElementById('newPollForm');
-            newPollForm.display = 'block';
+            _context4.t0 = window.console;
+            _context4.next = 3;
+            return window.contract.ping();
 
-          case 2:
+          case 3:
+            _context4.t1 = _context4.sent;
+
+            _context4.t0.log.call(_context4.t0, _context4.t1);
+
+            hide_create_poll();
+
+          case 6:
           case "end":
             return _context4.stop();
         }
@@ -21168,6 +21174,16 @@ function _create_poll() {
     }, _callee4);
   }));
   return _create_poll.apply(this, arguments);
+}
+
+function show_create_poll() {
+  var newPollForm = document.getElementById('new-poll-form');
+  newPollForm.display = 'block';
+}
+
+function hide_create_poll() {
+  var newPollForm = document.getElementById('new-poll-form');
+  newPollForm.display = 'none';
 }
 
 function vote() {
@@ -21182,7 +21198,7 @@ function _vote() {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            voteForm = document.getElementById('voteForm');
+            voteForm = document.getElementById('vote-form');
             variants = voteForm.getElementsByTagName('input');
             votes = {};
 
