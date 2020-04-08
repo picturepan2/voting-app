@@ -20902,7 +20902,7 @@ const wallet_account_1 = require("./wallet-account");
 exports.WalletAccount = wallet_account_1.WalletAccount;
 
 },{"./providers":"../node_modules/nearlib/lib/providers/index.js","./utils":"../node_modules/nearlib/lib/utils/index.js","./key_stores":"../node_modules/nearlib/lib/key_stores/index.js","./transaction":"../node_modules/nearlib/lib/transaction.js","./account":"../node_modules/nearlib/lib/account.js","./account_creator":"../node_modules/nearlib/lib/account_creator.js","./connection":"../node_modules/nearlib/lib/connection.js","./signer":"../node_modules/nearlib/lib/signer.js","./contract":"../node_modules/nearlib/lib/contract.js","./utils/key_pair":"../node_modules/nearlib/lib/utils/key_pair.js","./near":"../node_modules/nearlib/lib/near.js","./wallet-account":"../node_modules/nearlib/lib/wallet-account.js"}],"config.js":[function(require,module,exports) {
-var CONTRACT_NAME = "dev-1586193068694" || 'votingapp.nikolay';
+var CONTRACT_NAME = "dev-1586094679272" || 'votingapp.nikolay';
 
 function getConfig(env) {
   switch (env) {
@@ -20938,7 +20938,7 @@ function getConfig(env) {
       return {
         networkId: 'local',
         nodeUrl: 'http://localhost:3030',
-        keyPath: "".concat("/Users/nike", "/.near/validator_key.json"),
+        keyPath: "".concat("/Users/igotti", "/.near/validator_key.json"),
         walletUrl: 'http://localhost:4000/wallet',
         contractName: CONTRACT_NAME
       };
@@ -21027,9 +21027,13 @@ function _InitContract() {
             // is hosted at https://wallet.nearprotocol.com
             window.walletAccount = new nearlib.WalletAccount(window.near); // Getting the Account ID. If unauthorized yet, it's just empty string.
 
-            window.accountId = window.walletAccount.getAccountId(); // Initializing our contract APIs by contract name and configuration.
+            window.accountId = window.walletAccount.getAccountId();
+            window.voteState = {
+              voteOwner: window.accountId,
+              voteId: ''
+            }; // Initializing our contract APIs by contract name and configuration.
 
-            _context.next = 8;
+            _context.next = 9;
             return near.loadContract(nearConfig.contractName, {
               // eslint-disable-line require-atomic-updates
               // NOTE: This configuration only needed while NEAR is still in development
@@ -21041,10 +21045,10 @@ function _InitContract() {
               sender: window.accountId
             });
 
-          case 8:
+          case 9:
             window.contract = _context.sent;
 
-          case 9:
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -21107,6 +21111,10 @@ function signedInFlow() {
 
   document.getElementById('vote-button').addEventListener('click', function () {
     vote();
+  }); // Adding an event to create vote.
+
+  document.getElementById('create-vote-button').addEventListener('click', function () {
+    create_vote();
   });
 }
 
@@ -21124,20 +21132,11 @@ function _show_options() {
           case 0:
             _context3.next = 2;
             return window.contract.show_options({
-              account_id: window.accountId
+              vote_id: window.voteState.voteId
             });
 
           case 2:
             response = _context3.sent;
-
-            /*const response = {
-                user: "Nik",
-                question: "What is your transport?",
-                variants: {
-                    "bike": "Bike",
-                    "car": "Car"
-                }
-            }; */
             variants = ''; // TODO: maybe use older ES syntax?
 
             for (_i = 0, _Object$entries = Object.entries(response.variants); _i < _Object$entries.length; _i++) {
@@ -21158,20 +21157,42 @@ function _show_options() {
   return _show_options.apply(this, arguments);
 }
 
+function create_vote() {
+  return _create_vote.apply(this, arguments);
+}
+
+function _create_vote() {
+  _create_vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            alert("Create vote");
+
+          case 1:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _create_vote.apply(this, arguments);
+}
+
 function vote() {
   return _vote.apply(this, arguments);
 } // Loads nearlib and this contract into window scope.
 
 
 function _vote() {
-  _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+  _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
     var voteForm, variants, result, i, variant, answer;
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
             voteForm = document.getElementById('voteForm');
-            variants = voteForm.getElementsByTagName("input");
+            variants = voteForm.getElementsByTagName('input');
             result = {
               user: window.accountId,
               answers: []
@@ -21181,20 +21202,20 @@ function _vote() {
               variant = variants[i];
               answer = {
                 id: variant.id,
-                checked: variant.checked
+                checked: variant.checked ? 1 : 0
               }; //window.console.log(variant.id + " " + variant.checked);
 
               result.answers.push(answer);
             }
 
-            window.contract.vote(result);
+            window.contract.vote(window.voteState.voteId, result);
 
           case 5:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4);
+    }, _callee5);
   }));
   return _vote.apply(this, arguments);
 }
@@ -21228,7 +21249,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52857" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58272" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
