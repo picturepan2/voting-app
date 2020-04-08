@@ -21168,10 +21168,16 @@ function _create_poll() {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            alert("Create poll");
-            window.console.log(window.contract.ping());
+            _context4.t0 = window.console;
+            _context4.next = 3;
+            return window.contract.ping();
 
-          case 2:
+          case 3:
+            _context4.t1 = _context4.sent;
+
+            _context4.t0.log.call(_context4.t0, _context4.t1);
+
+          case 5:
           case "end":
             return _context4.stop();
         }
