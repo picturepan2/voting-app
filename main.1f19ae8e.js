@@ -21181,14 +21181,14 @@ function vote() {
 
 function _vote() {
   _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-    var voteForm, variants, result, i, variant, answer;
+    var voteForm, variants, votes, i, variant, answer;
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             voteForm = document.getElementById('voteForm');
             variants = voteForm.getElementsByTagName('input');
-            result = {
+            votes = {
               user: window.accountId,
               answers: []
             };
@@ -21200,12 +21200,12 @@ function _vote() {
                 checked: variant.checked ? 1 : 0
               }; //window.console.log(variant.id + " " + variant.checked);
 
-              result.answers.push(answer);
+              votes.answers.push(answer);
             }
 
             window.contract.vote({
               poll_id: window.voteState.pollId,
-              result: result
+              votes: votes
             });
 
           case 5:
