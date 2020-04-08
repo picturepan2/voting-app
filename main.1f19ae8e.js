@@ -21201,7 +21201,7 @@ function _create_poll() {
             poll = _context4.sent;
             window.console.log("poll is " + poll);
             base = document.baseURI;
-            alert("poll is at " + base + "?" + poll);
+            alert("poll is at " + base + poll);
             hide_create_poll();
 
           case 13:
