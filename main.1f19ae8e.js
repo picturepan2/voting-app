@@ -21131,9 +21131,7 @@ function _show_options() {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return window.contract.show_options({
-              vote_id: window.voteState.voteId
-            });
+            return window.contract.show_options(window.voteState.voteId);
 
           case 2:
             response = _context3.sent;
