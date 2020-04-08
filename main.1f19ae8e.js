@@ -20902,7 +20902,7 @@ const wallet_account_1 = require("./wallet-account");
 exports.WalletAccount = wallet_account_1.WalletAccount;
 
 },{"./providers":"../node_modules/nearlib/lib/providers/index.js","./utils":"../node_modules/nearlib/lib/utils/index.js","./key_stores":"../node_modules/nearlib/lib/key_stores/index.js","./transaction":"../node_modules/nearlib/lib/transaction.js","./account":"../node_modules/nearlib/lib/account.js","./account_creator":"../node_modules/nearlib/lib/account_creator.js","./connection":"../node_modules/nearlib/lib/connection.js","./signer":"../node_modules/nearlib/lib/signer.js","./contract":"../node_modules/nearlib/lib/contract.js","./utils/key_pair":"../node_modules/nearlib/lib/utils/key_pair.js","./near":"../node_modules/nearlib/lib/near.js","./wallet-account":"../node_modules/nearlib/lib/wallet-account.js"}],"config.js":[function(require,module,exports) {
-var CONTRACT_NAME = "dev-1586362824615" || 'votingapp.nikolay';
+var CONTRACT_NAME = "dev-1586363297462" || 'votingapp.nikolay';
 
 function getConfig(env) {
   switch (env) {
@@ -21112,7 +21112,7 @@ function show_poll() {
 
 function _show_poll() {
   _show_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var response, variants, options;
+    var response, variants, v, options;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -21125,9 +21125,10 @@ function _show_poll() {
           case 2:
             response = _context3.sent;
             window.console.log(response);
-            variants = ''; // TODO: maybe use older ES syntax?
+            variants = '';
 
-            for (v in response.variants) {
+            for (index = 0; index < response.variants.length; index++) {
+              v = response.variants[index];
               variants += '<input type="checkbox" id="' + v.option_id + '" value="' + v.option_id + '">' + '<label for="' + v.option_id + '">' + v.message + '</label><br>';
             }
 
@@ -21246,7 +21247,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56974" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59121" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
