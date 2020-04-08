@@ -21124,7 +21124,7 @@ function _show_poll() {
 
           case 2:
             response = _context3.sent;
-            window.console.log(response);
+            //window.console.log(response);
             variants = '';
 
             for (index = 0; index < response.variants.length; index++) {
@@ -21135,7 +21135,7 @@ function _show_poll() {
             options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
-          case 8:
+          case 7:
           case "end":
             return _context3.stop();
         }
@@ -21151,20 +21151,16 @@ function create_poll() {
 
 function _create_poll() {
   _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var newPollForm;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.t0 = window.console;
-            _context4.next = 3;
-            return window.contract.ping();
+            //window.console.log(await window.contract.ping())
+            newPollForm = document.getElementById('newPollForm');
+            newPollForm.display = 'block';
 
-          case 3:
-            _context4.t1 = _context4.sent;
-
-            _context4.t0.log.call(_context4.t0, _context4.t1);
-
-          case 5:
+          case 2:
           case "end":
             return _context4.stop();
         }
