@@ -21030,7 +21030,7 @@ function _InitContract() {
             window.accountId = window.walletAccount.getAccountId();
             window.voteState = {
               voteOwner: window.accountId,
-              voteId: ''
+              pollId: 'UNDEFINED'
             }; // Initializing our contract APIs by contract name and configuration.
 
             _context.next = 9;
@@ -21038,9 +21038,9 @@ function _InitContract() {
               // eslint-disable-line require-atomic-updates
               // NOTE: This configuration only needed while NEAR is still in development
               // View methods are read only. They don't modify the state, but usually return some value.
-              viewMethods: ['show_options'],
+              viewMethods: ['show_poll'],
               // Change methods can modify the state. But you don't receive the returned value when called.
-              changeMethods: ['vote'],
+              changeMethods: ['vote', 'create_poll'],
               // Sender is the account ID to initialize transactions.
               sender: window.accountId
             });
@@ -21101,7 +21101,7 @@ function signedOutFlow() {
 function signedInFlow() {
   // Displaying the signed in flow container.
   document.getElementById('signed-in-flow').classList.remove('d-none');
-  show_options(); // Adding an event to a sign-out button.
+  show_poll(); // Adding an event to a sign-out button.
 
   document.getElementById('sign-out-button').addEventListener('click', function () {
     walletAccount.signOut(); // Forcing redirect.
@@ -21113,17 +21113,17 @@ function signedInFlow() {
     vote();
   }); // Adding an event to create vote.
 
-  document.getElementById('create-vote-button').addEventListener('click', function () {
-    create_vote();
+  document.getElementById('create-poll-button').addEventListener('click', function () {
+    create_poll();
   });
 }
 
-function show_options() {
-  return _show_options.apply(this, arguments);
+function show_poll() {
+  return _show_poll.apply(this, arguments);
 }
 
-function _show_options() {
-  _show_options = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+function _show_poll() {
+  _show_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
     var response, variants, _i, _Object$entries, _Object$entries$_i, key, value, options;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
@@ -21131,7 +21131,9 @@ function _show_options() {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return window.contract.show_options(window.voteState.voteId);
+            return window.contract.show_poll({
+              poll_id: window.voteState.pollId
+            });
 
           case 2:
             response = _context3.sent;
@@ -21153,20 +21155,20 @@ function _show_options() {
       }
     }, _callee3);
   }));
-  return _show_options.apply(this, arguments);
+  return _show_poll.apply(this, arguments);
 }
 
-function create_vote() {
-  return _create_vote.apply(this, arguments);
+function create_poll() {
+  return _create_poll.apply(this, arguments);
 }
 
-function _create_vote() {
-  _create_vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+function _create_poll() {
+  _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            alert("Create vote");
+            alert("Create poll");
 
           case 1:
           case "end":
@@ -21175,7 +21177,7 @@ function _create_vote() {
       }
     }, _callee4);
   }));
-  return _create_vote.apply(this, arguments);
+  return _create_poll.apply(this, arguments);
 }
 
 function vote() {
@@ -21207,7 +21209,10 @@ function _vote() {
               result.answers.push(answer);
             }
 
-            window.contract.vote(window.voteState.voteId, result);
+            window.contract.vote({
+              poll_id: window.voteState.pollId,
+              result: result
+            });
 
           case 5:
           case "end":
