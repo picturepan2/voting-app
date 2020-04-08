@@ -21188,15 +21188,7 @@ function _create_poll() {
             v1 = document.getElementById("new-poll-v1").value;
             v2 = document.getElementById("new-poll-v2").value;
             v3 = document.getElementById("new-poll-v3").value;
-            window.console.log({
-              question: question,
-              variants: {
-                v1: v1,
-                v2: v2,
-                v3: v3
-              }
-            });
-            _context4.next = 7;
+            _context4.next = 6;
             return window.contract.create_poll({
               question: question,
               variants: {
@@ -21206,7 +21198,7 @@ function _create_poll() {
               }
             });
 
-          case 7:
+          case 6:
             poll = _context4.sent;
             window.console.log("poll is " + poll);
             base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
@@ -21214,7 +21206,7 @@ function _create_poll() {
             document.getElementById("new-poll-address").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
             hide_create_poll();
 
-          case 13:
+          case 12:
           case "end":
             return _context4.stop();
         }
