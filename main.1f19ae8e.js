@@ -21137,6 +21137,7 @@ function _show_options() {
 
           case 2:
             response = _context3.sent;
+            window.console.log(response);
             variants = ''; // TODO: maybe use older ES syntax?
 
             for (_i = 0, _Object$entries = Object.entries(response.variants); _i < _Object$entries.length; _i++) {
@@ -21147,7 +21148,7 @@ function _show_options() {
             options = '<form id="voteForm">' + '<fieldset>' + '<legend>' + "Dear @" + response.user + " please vote on <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
-          case 7:
+          case 8:
           case "end":
             return _context3.stop();
         }
