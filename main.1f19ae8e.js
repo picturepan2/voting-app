@@ -21175,7 +21175,7 @@ function _create_poll() {
         switch (_context4.prev = _context4.next) {
           case 0:
             window.console.log("create_poll called");
-            question = document.getElementById.item("new-poll-question").value;
+            question = document.getElementById("new-poll-question").value;
             v1 = document.getElementById("new-poll-v1").value;
             v2 = document.getElementById("new-poll-v2").value;
             v3 = document.getElementById("new-poll-v3").value;
