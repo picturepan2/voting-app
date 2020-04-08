@@ -21248,7 +21248,7 @@ function _create_poll() {
                 v2: v2,
                 v3: v3
               }
-            }, new BigNumber('1e16'));
+            }, new BN('1e16'));
 
           case 6:
             poll = _context5.sent;
