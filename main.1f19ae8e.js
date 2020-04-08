@@ -21177,9 +21177,9 @@ function _create_poll() {
             window.console.log("create_poll called");
             newPollForm = document.getElementById('new-poll-form');
             question = newPollForm.getElementById("question").value;
-            v1 = newPollForm.getElementById("v1").value;
-            v2 = newPollForm.getElementById("v1").value;
-            v3 = newPollForm.getElementById("v1").value;
+            v1 = newPollForm.childNodes.item("v1").value;
+            v2 = newPollForm.childNodes.item("v2").value;
+            v3 = newPollForm.childNodes.item("v3").value;
             _context4.next = 8;
             return window.contract.create_poll({
               question: question,
