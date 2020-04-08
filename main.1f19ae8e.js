@@ -24655,8 +24655,9 @@ function _show_vote_results() {
             document.getElementById('result-poll-v3').innerText = format_variant(response.poll, response.results, 2);
             voted = Object.keys(response.results.voted).join(" ");
             document.getElementById('result-poll-voted').innerText = voted;
+            document.getElementById('vote-options').style.display = 'none';
 
-          case 14:
+          case 15:
           case "end":
             return _context4.stop();
         }
