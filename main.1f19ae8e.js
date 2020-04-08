@@ -24721,12 +24721,13 @@ function _vote() {
               votes[variant.id] = variant.checked ? 1 : 0;
             }
 
-            window.contract.vote({
+            _context6.next = 6;
+            return window.contract.vote({
               poll_id: window.voteState.pollId,
               votes: votes
-            });
+            }, new BN(10000000000000));
 
-          case 5:
+          case 6:
           case "end":
             return _context6.stop();
         }
