@@ -21200,13 +21200,12 @@ function _create_poll() {
           case 8:
             poll = _context4.sent;
             window.console.log("poll is " + poll);
-            base = document.baseURI;
+            base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
             poll_address = base + poll;
             document.getElementById("new-poll-address").innerHTML = '<a href="' + poll_address + '">' + poll_address + '</a>';
-            alert("poll is at " + poll_address);
             hide_create_poll();
 
-          case 15:
+          case 14:
           case "end":
             return _context4.stop();
         }
