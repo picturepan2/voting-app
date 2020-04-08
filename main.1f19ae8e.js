@@ -21143,6 +21143,16 @@ function _show_poll() {
 
           case 5:
             response = _context3.sent;
+
+            if (!(response.pollId == 'INVALID')) {
+              _context3.next = 9;
+              break;
+            }
+
+            alert('No such poll!');
+            return _context3.abrupt("return");
+
+          case 9:
             variants = '';
 
             for (index = 0; index < response.variants.length; index++) {
@@ -21153,7 +21163,7 @@ function _show_poll() {
             options = '<form id="vote-form">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
 
-          case 10:
+          case 13:
           case "end":
             return _context3.stop();
         }
@@ -21174,7 +21184,6 @@ function _create_poll() {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            window.console.log("create_poll called");
             question = document.getElementById("new-poll-question").value;
             v1 = document.getElementById("new-poll-v1").value;
             v2 = document.getElementById("new-poll-v2").value;
@@ -21187,7 +21196,7 @@ function _create_poll() {
                 v3: v3
               }
             });
-            _context4.next = 8;
+            _context4.next = 7;
             return window.contract.create_poll({
               question: question,
               variants: {
@@ -21197,15 +21206,15 @@ function _create_poll() {
               }
             });
 
-          case 8:
+          case 7:
             poll = _context4.sent;
             window.console.log("poll is " + poll);
             base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
             poll_address = base + poll;
-            document.getElementById("new-poll-address").innerHTML = '<a href="' + poll_address + '">' + poll_address + '</a>';
+            document.getElementById("new-poll-address").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
             hide_create_poll();
 
-          case 14:
+          case 13:
           case "end":
             return _context4.stop();
         }
