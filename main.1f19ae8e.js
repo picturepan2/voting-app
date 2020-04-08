@@ -21169,17 +21169,16 @@ function create_poll() {
 
 function _create_poll() {
   _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var newPollForm, question, v1, v2, v3, poll, base;
+    var question, v1, v2, v3, poll, base;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             window.console.log("create_poll called");
-            newPollForm = document.getElementById('new-poll-form');
-            question = newPollForm.childNodes.item("question").value;
-            v1 = newPollForm.childNodes.item("v1").value;
-            v2 = newPollForm.childNodes.item("v2").value;
-            v3 = newPollForm.childNodes.item("v3").value;
+            question = document.getElementById.item("new-poll-question").value;
+            v1 = document.getElementById("new-poll-v1").value;
+            v2 = document.getElementById("new-poll-v2").value;
+            v3 = document.getElementById("new-poll-v3").value;
             window.console.log({
               question: question,
               variants: {
@@ -21188,7 +21187,7 @@ function _create_poll() {
                 v3: v3
               }
             });
-            _context4.next = 9;
+            _context4.next = 8;
             return window.contract.create_poll({
               question: question,
               variants: {
@@ -21198,14 +21197,14 @@ function _create_poll() {
               }
             });
 
-          case 9:
+          case 8:
             poll = _context4.sent;
             window.console.log("poll is " + poll);
             base = document.baseURI;
             alert("poll is at " + base + "?" + poll);
             hide_create_poll();
 
-          case 14:
+          case 13:
           case "end":
             return _context4.stop();
         }
