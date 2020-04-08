@@ -21038,7 +21038,7 @@ function _InitContract() {
               // eslint-disable-line require-atomic-updates
               // NOTE: This configuration only needed while NEAR is still in development
               // View methods are read only. They don't modify the state, but usually return some value.
-              viewMethods: ['show_poll'],
+              viewMethods: ['show_poll', 'ping'],
               // Change methods can modify the state. But you don't receive the returned value when called.
               changeMethods: ['vote', 'create_poll'],
               // Sender is the account ID to initialize transactions.
@@ -21169,8 +21169,9 @@ function _create_poll() {
         switch (_context4.prev = _context4.next) {
           case 0:
             alert("Create poll");
+            window.console.log(window.contract.ping());
 
-          case 1:
+          case 2:
           case "end":
             return _context4.stop();
         }
