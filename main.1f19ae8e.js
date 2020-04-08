@@ -21029,7 +21029,7 @@ function _InitContract() {
               // eslint-disable-line require-atomic-updates
               // NOTE: This configuration only needed while NEAR is still in development
               // View methods are read only. They don't modify the state, but usually return some value.
-              viewMethods: ['show_poll', 'ping'],
+              viewMethods: ['show_poll', 'show_results', 'ping'],
               // Change methods can modify the state. But you don't receive the returned value when called.
               changeMethods: ['vote', 'create_poll'],
               // Sender is the account ID to initialize transactions.
@@ -21098,10 +21098,12 @@ function signedInFlow() {
     walletAccount.signOut(); // Forcing redirect.
 
     window.location.replace(window.location.origin + window.location.pathname);
-  }); // Adding an event to change greeting button.
-
+  });
   document.getElementById('vote-button').addEventListener('click', function () {
     vote();
+  });
+  document.getElementById('show-results-button').addEventListener('click', function () {
+    show_vote_results();
   }); // Adding an event to create vote.
 
   document.getElementById('create-poll-button').addEventListener('click', function () {
@@ -21110,7 +21112,7 @@ function signedInFlow() {
   document.getElementById('create-poll-submit').addEventListener('click', function () {
     create_poll();
   });
-  document.getElementById('create-poll-submit').addEventListener('click', function () {
+  document.getElementById('create-poll-cancel').addEventListener('click', function () {
     // TODO: clear state?
     hide_create_poll();
   });
@@ -21162,8 +21164,10 @@ function _show_poll() {
 
             options = '<form id="vote-form">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote_options').innerHTML = options;
+            document.getElementById('vote-button').style.display = 'inline';
+            document.getElementById('show-results-button').style.display = 'inline';
 
-          case 13:
+          case 15:
           case "end":
             return _context3.stop();
         }
@@ -21173,22 +21177,70 @@ function _show_poll() {
   return _show_poll.apply(this, arguments);
 }
 
+function show_vote_results() {
+  return _show_vote_results.apply(this, arguments);
+}
+
+function _show_vote_results() {
+  _show_vote_results = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var response;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            if (window.voteState.pollId) {
+              _context4.next = 2;
+              break;
+            }
+
+            return _context4.abrupt("return");
+
+          case 2:
+            _context4.next = 4;
+            return window.contract.show_results({
+              poll_id: window.voteState.pollId
+            });
+
+          case 4:
+            response = _context4.sent;
+
+            if (!(response.pollId == 'INVALID')) {
+              _context4.next = 8;
+              break;
+            }
+
+            alert('No such poll!');
+            return _context4.abrupt("return");
+
+          case 8:
+            window.console.log(response);
+
+          case 9:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _show_vote_results.apply(this, arguments);
+}
+
 function create_poll() {
   return _create_poll.apply(this, arguments);
 }
 
 function _create_poll() {
-  _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+  _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
     var question, v1, v2, v3, poll, base, poll_address;
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
-        switch (_context4.prev = _context4.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
             question = document.getElementById("new-poll-question").value;
             v1 = document.getElementById("new-poll-v1").value;
             v2 = document.getElementById("new-poll-v2").value;
             v3 = document.getElementById("new-poll-v3").value;
-            _context4.next = 6;
+            _context5.next = 6;
             return window.contract.create_poll({
               question: question,
               variants: {
@@ -21199,7 +21251,7 @@ function _create_poll() {
             });
 
           case 6:
-            poll = _context4.sent;
+            poll = _context5.sent;
             window.console.log("poll is " + poll);
             base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
             poll_address = base + poll;
@@ -21208,10 +21260,10 @@ function _create_poll() {
 
           case 12:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4);
+    }, _callee5);
   }));
   return _create_poll.apply(this, arguments);
 }
@@ -21222,11 +21274,11 @@ function vote() {
 
 
 function _vote() {
-  _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+  _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
     var voteForm, variants, votes, i, variant;
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             voteForm = document.getElementById('vote-form');
             variants = voteForm.getElementsByTagName('input');
@@ -21244,10 +21296,10 @@ function _vote() {
 
           case 5:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
       }
-    }, _callee5);
+    }, _callee6);
   }));
   return _vote.apply(this, arguments);
 }
