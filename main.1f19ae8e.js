@@ -24610,7 +24610,8 @@ function _show_poll() {
 }
 
 function format_variant(poll, results, index) {
-  return poll.variants[index].message + ' -> ' + results.variants[poll.variants[index].option_id];
+  var voted = results.variants[poll.variants[index].option_id];
+  return poll.variants[index].message + ' -> ' + (voted ? voted : 0);
 }
 
 function show_vote_results() {
