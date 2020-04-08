@@ -21181,7 +21181,7 @@ function vote() {
 
 function _vote() {
   _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-    var voteForm, variants, votes, i, variant, answer;
+    var voteForm, variants, votes, i, variant;
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
@@ -21195,12 +21195,7 @@ function _vote() {
 
             for (i = 0; i < variants.length; i++) {
               variant = variants[i];
-              answer = {
-                id: variant.id,
-                checked: variant.checked ? 1 : 0
-              }; //window.console.log(variant.id + " " + variant.checked);
-
-              votes.answers.push(answer);
+              votes.answers[variant.id] = variant.checked ? 1 : 0;
             }
 
             window.contract.vote({
