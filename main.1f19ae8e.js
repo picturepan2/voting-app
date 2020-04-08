@@ -21167,13 +21167,14 @@ function _create_poll() {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
+            alert("HII");
             window.console.log("create_poll called");
             newPollForm = document.getElementById('new-poll-form');
             question = newPollForm.getElementById("question").value;
             v1 = newPollForm.getElementById("v1").value;
             v2 = newPollForm.getElementById("v1").value;
             v3 = newPollForm.getElementById("v1").value;
-            _context4.next = 8;
+            _context4.next = 9;
             return window.contract.create_poll({
               question: question,
               variants: {
@@ -21183,14 +21184,14 @@ function _create_poll() {
               }
             });
 
-          case 8:
+          case 9:
             poll = _context4.sent;
             window.console.log("poll is " + poll);
             base = document.baseURI;
             alert("poll is at " + base + "?" + poll);
             hide_create_poll();
 
-          case 13:
+          case 14:
           case "end":
             return _context4.stop();
         }
