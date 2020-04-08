@@ -24640,7 +24640,7 @@ function _show_vote_results() {
           case 4:
             response = _context4.sent;
 
-            if (response.pollId) {
+            if (response) {
               _context4.next = 7;
               break;
             }
@@ -24716,7 +24716,7 @@ function vote() {
 
 function _vote() {
   _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-    var voteForm, variants, votes, i, variant;
+    var voteForm, variants, votes, i, variant, result;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
@@ -24728,7 +24728,7 @@ function _vote() {
             for (i = 0; i < variants.length; i++) {
               variant = variants[i];
               votes[variant.id] = variant.checked ? 1 : 0;
-            } // Creation of poll and voting need more gas to execute.
+            } // Creation of poll and voting needs more gas to execute.
 
 
             _context6.next = 6;
@@ -24738,6 +24738,10 @@ function _vote() {
             }, new BN(10000000000000));
 
           case 6:
+            result = _context6.sent;
+            alert("Your voice is " + (result ? "counted" : "not counted"));
+
+          case 8:
           case "end":
             return _context6.stop();
         }
