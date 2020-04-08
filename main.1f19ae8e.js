@@ -21102,7 +21102,7 @@ function signedInFlow() {
   }); // Adding an event to create vote.
 
   document.getElementById('create-poll-button').addEventListener('click', function () {
-    create_poll();
+    show_create_poll();
   });
 }
 
@@ -21178,11 +21178,13 @@ function _create_poll() {
 
 function show_create_poll() {
   var newPollForm = document.getElementById('new-poll-form');
+  window.console.log(newPollForm);
   newPollForm.style.display = 'block';
 }
 
 function hide_create_poll() {
   var newPollForm = document.getElementById('new-poll-form');
+  window.console.log(newPollForm);
   newPollForm.style.display = 'none';
 }
 
