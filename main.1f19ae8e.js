@@ -21178,12 +21178,12 @@ function _create_poll() {
 
 function show_create_poll() {
   var newPollForm = document.getElementById('new-poll-form');
-  newPollForm.display = 'block';
+  newPollForm.style.display = 'block';
 }
 
 function hide_create_poll() {
   var newPollForm = document.getElementById('new-poll-form');
-  newPollForm.display = 'none';
+  newPollForm.style.display = 'none';
 }
 
 function vote() {
