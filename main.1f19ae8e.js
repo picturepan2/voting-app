@@ -24619,7 +24619,7 @@ function show_vote_results() {
 
 function _show_vote_results() {
   _show_vote_results = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var response;
+    var response, voted;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -24653,9 +24653,10 @@ function _show_vote_results() {
             document.getElementById('result-poll-v1').innerText = format_variant(response.poll, response.results, 0);
             document.getElementById('result-poll-v2').innerText = format_variant(response.poll, response.results, 1);
             document.getElementById('result-poll-v3').innerText = format_variant(response.poll, response.results, 2);
-            document.getElementById('result-poll-voted').innerText = response.results.voted.size;
+            voted = Object.keys(response.results.voted).join(" ");
+            document.getElementById('result-poll-voted').innerText = voted;
 
-          case 13:
+          case 14:
           case "end":
             return _context4.stop();
         }
