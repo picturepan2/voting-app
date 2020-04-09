@@ -24788,7 +24788,7 @@ function status_message(text) {
 
 function hide_poll_variants() {
   var vote = document.getElementById('vote-options');
-  if (vote) vote.display.style = 'none';
+  if (vote) vote.style.display = 'none';
 }
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js","bn.js":"../node_modules/bn.js/lib/bn.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
