@@ -24699,9 +24699,9 @@ function _create_poll() {
 
           case 7:
             poll = _context5.sent;
-            status_message("Ready!");
+            status_message("Ready, created " + poll);
             base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
-            poll_address = base + poll;
+            poll_address = base + "/?poll_id=" + poll;
             document.getElementById("new-poll-address").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
             hide_create_poll();
 
