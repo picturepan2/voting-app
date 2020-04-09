@@ -24728,7 +24728,7 @@ function _vote() {
           case 0:
             voteForm = document.getElementById('vote-form');
 
-            if (!(!voteForm || vote.style.display == 'none')) {
+            if (!(!voteForm || voteForm.style.display == 'none')) {
               _context6.next = 4;
               break;
             }
