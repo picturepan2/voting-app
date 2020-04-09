@@ -24532,7 +24532,14 @@ function signedInFlow() {
     window.location.replace(window.location.origin + window.location.pathname);
   });
   document.getElementById('vote-button').addEventListener('click', function () {
-    vote();
+    var vote = document.getElementById('vote-options');
+    window.console.log(vote);
+
+    if (!vote || vote.style.display == 'none') {
+      show_poll();
+    } else {
+      vote();
+    }
   });
   document.getElementById('show-results-button').addEventListener('click', function () {
     show_vote_results();
@@ -24595,10 +24602,12 @@ function _show_poll() {
 
             options = '<form id="vote-form">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote-options').innerHTML = options;
+            document.getElementById('vote-options').style.display = 'inline';
+            hide_poll_results();
             document.getElementById('vote-button').style.display = 'inline';
             document.getElementById('show-results-button').style.display = 'inline';
 
-          case 14:
+          case 16:
           case "end":
             return _context3.stop();
         }
@@ -24721,23 +24730,12 @@ function vote() {
 
 function _vote() {
   _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-    var voteForm, vote, variants, votes, i, variant, result;
+    var voteForm, variants, votes, i, variant, result;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             voteForm = document.getElementById('vote-form');
-            vote = document.getElementById('vote-options');
-
-            if (!(!vote || vote.style.display == 'none')) {
-              _context6.next = 5;
-              break;
-            }
-
-            show_poll();
-            return _context6.abrupt("return");
-
-          case 5:
             variants = voteForm.getElementsByTagName('input');
             votes = {};
 
@@ -24748,17 +24746,17 @@ function _vote() {
 
 
             status_message("Talking to the blockchain...");
-            _context6.next = 11;
+            _context6.next = 7;
             return window.contract.vote({
               poll_id: window.voteState.pollId,
               votes: votes
             }, new BN(10000000000000));
 
-          case 11:
+          case 7:
             result = _context6.sent;
             status_message("Your voice is " + (result ? "counted" : "NOT counted"));
 
-          case 13:
+          case 9:
           case "end":
             return _context6.stop();
         }
