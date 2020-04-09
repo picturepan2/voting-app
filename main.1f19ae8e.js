@@ -24569,24 +24569,23 @@ function _show_poll() {
             return _context3.abrupt("return");
 
           case 2:
-            window.console.log(window.voteState.pollId);
-            _context3.next = 5;
+            _context3.next = 4;
             return window.contract.show_poll({
               poll_id: window.voteState.pollId
             });
 
-          case 5:
+          case 4:
             response = _context3.sent;
 
             if (response) {
-              _context3.next = 9;
+              _context3.next = 8;
               break;
             }
 
             status_message('No such poll ' + window.voteState.pollId);
             return _context3.abrupt("return");
 
-          case 9:
+          case 8:
             variants = '';
 
             for (index = 0; index < response.variants.length; index++) {
@@ -24599,7 +24598,7 @@ function _show_poll() {
             document.getElementById('vote-button').style.display = 'inline';
             document.getElementById('show-results-button').style.display = 'inline';
 
-          case 15:
+          case 14:
           case "end":
             return _context3.stop();
         }
