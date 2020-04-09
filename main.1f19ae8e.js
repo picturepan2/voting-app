@@ -24539,7 +24539,6 @@ function signedInFlow() {
   }); // Adding an event to create vote.
 
   document.getElementById('create-poll-button').addEventListener('click', function () {
-    hide_display_results();
     show_create_poll();
   });
   document.getElementById('create-poll-submit').addEventListener('click', function () {
