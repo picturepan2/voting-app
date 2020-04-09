@@ -24764,6 +24764,7 @@ function show_create_poll() {
   var newPollForm = document.getElementById('new-poll-form');
   newPollForm.style.display = 'block';
   hide_poll_results();
+  hide_poll_variants();
 }
 
 function hide_create_poll() {
@@ -24774,6 +24775,7 @@ function hide_create_poll() {
 function show_poll_results() {
   document.getElementById('show-poll-results').style.display = 'block';
   hide_create_poll();
+  hide_poll_variants();
 }
 
 function hide_poll_results() {
@@ -24782,6 +24784,10 @@ function hide_poll_results() {
 
 function status_message(text) {
   document.getElementById('status-message-bar').innerText = text;
+}
+
+function hide_poll_variants() {
+  document.getElementById('vote-options').display.style = 'none';
 }
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js","bn.js":"../node_modules/bn.js/lib/bn.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
