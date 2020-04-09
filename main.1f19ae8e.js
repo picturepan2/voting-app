@@ -24633,22 +24633,24 @@ function _show_vote_results() {
             return _context4.abrupt("return");
 
           case 2:
-            _context4.next = 4;
+            status_message("Talking to the blockchain...");
+            _context4.next = 5;
             return window.contract.show_results({
               poll_id: window.voteState.pollId
             });
 
-          case 4:
+          case 5:
             response = _context4.sent;
+            status_message("Ready!");
 
             if (response) {
-              _context4.next = 7;
+              _context4.next = 9;
               break;
             }
 
             return _context4.abrupt("return");
 
-          case 7:
+          case 9:
             show_poll_results();
             document.getElementById('result-poll-question').innerText = response.poll.question;
             document.getElementById('result-poll-v1').innerText = format_variant(response.poll, response.results, 0);
@@ -24658,7 +24660,7 @@ function _show_vote_results() {
             document.getElementById('result-poll-voted').innerText = voted;
             document.getElementById('vote-options').style.display = 'none';
 
-          case 15:
+          case 17:
           case "end":
             return _context4.stop();
         }
@@ -24684,7 +24686,8 @@ function _create_poll() {
             v2 = document.getElementById("new-poll-v2").value;
             v3 = document.getElementById("new-poll-v3").value; // Creation of poll and voting need more gas to execute.
 
-            _context5.next = 6;
+            status_message("Talking to the blockchain...");
+            _context5.next = 7;
             return window.contract.create_poll({
               question: question,
               variants: {
@@ -24694,14 +24697,15 @@ function _create_poll() {
               }
             }, new BN(10000000000000));
 
-          case 6:
+          case 7:
             poll = _context5.sent;
+            status_message("Ready!");
             base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
             poll_address = base + poll;
             document.getElementById("new-poll-address").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
             hide_create_poll();
 
-          case 11:
+          case 13:
           case "end":
             return _context5.stop();
         }
@@ -24733,17 +24737,18 @@ function _vote() {
             } // Creation of poll and voting needs more gas to execute.
 
 
-            _context6.next = 6;
+            status_message("Talking to the blockchain...");
+            _context6.next = 7;
             return window.contract.vote({
               poll_id: window.voteState.pollId,
               votes: votes
             }, new BN(10000000000000));
 
-          case 6:
+          case 7:
             result = _context6.sent;
-            alert("Your voice is " + (result ? "counted" : "not counted"));
+            status_message("Your voice is " + (result ? "counted" : "NOT counted"));
 
-          case 8:
+          case 9:
           case "end":
             return _context6.stop();
         }
@@ -24773,6 +24778,10 @@ function show_poll_results() {
 
 function hide_poll_results() {
   document.getElementById('show-poll-results').style.display = 'none';
+}
+
+function status_message(text) {
+  document.getElementById('status-message-bar').innerText = text;
 }
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js","bn.js":"../node_modules/bn.js/lib/bn.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
