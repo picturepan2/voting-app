@@ -24532,10 +24532,9 @@ function signedInFlow() {
     window.location.replace(window.location.origin + window.location.pathname);
   });
   document.getElementById('vote-button').addEventListener('click', function () {
-    var vote = document.getElementById('vote-options');
-    window.console.log(vote);
+    var voteOptions = document.getElementById('vote-options');
 
-    if (!vote || vote.style.display == 'none') {
+    if (!voteOptions || voteOptions.style.display == 'none') {
       show_poll();
     } else {
       vote();
