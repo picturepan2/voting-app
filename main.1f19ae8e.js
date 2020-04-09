@@ -24583,7 +24583,7 @@ function _show_poll() {
               break;
             }
 
-            alert('No such poll!');
+            status_message('No such poll ' + window.voteState.pollId);
             return _context3.abrupt("return");
 
           case 9:
@@ -24787,7 +24787,8 @@ function status_message(text) {
 }
 
 function hide_poll_variants() {
-  document.getElementById('vote-options').display.style = 'none';
+  var vote = document.getElementById('vote-options');
+  if (vote) vote.display.style = 'none';
 }
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js","bn.js":"../node_modules/bn.js/lib/bn.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
