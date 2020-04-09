@@ -24539,6 +24539,7 @@ function signedInFlow() {
   }); // Adding an event to create vote.
 
   document.getElementById('create-poll-button').addEventListener('click', function () {
+    hide_display_results();
     show_create_poll();
   });
   document.getElementById('create-poll-submit').addEventListener('click', function () {
@@ -24578,7 +24579,7 @@ function _show_poll() {
           case 5:
             response = _context3.sent;
 
-            if (!(response.pollId == 'INVALID')) {
+            if (response) {
               _context3.next = 9;
               break;
             }
@@ -24649,7 +24650,7 @@ function _show_vote_results() {
             return _context4.abrupt("return");
 
           case 7:
-            document.getElementById('show-poll-results').style.display = 'block';
+            show_poll_results();
             document.getElementById('result-poll-question').innerText = response.poll.question;
             document.getElementById('result-poll-v1').innerText = format_variant(response.poll, response.results, 0);
             document.getElementById('result-poll-v2').innerText = format_variant(response.poll, response.results, 1);
@@ -24696,13 +24697,12 @@ function _create_poll() {
 
           case 6:
             poll = _context5.sent;
-            window.console.log("poll is " + poll);
             base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
             poll_address = base + poll;
             document.getElementById("new-poll-address").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
             hide_create_poll();
 
-          case 12:
+          case 11:
           case "end":
             return _context5.stop();
         }
@@ -24759,11 +24759,21 @@ window.nearInitPromise = InitContract().then(doWork).catch(console.error);
 function show_create_poll() {
   var newPollForm = document.getElementById('new-poll-form');
   newPollForm.style.display = 'block';
+  hide_poll_results();
 }
 
 function hide_create_poll() {
   var newPollForm = document.getElementById('new-poll-form');
   newPollForm.style.display = 'none';
+}
+
+function show_poll_results() {
+  document.getElementById('show-poll-results').style.display = 'block';
+  hide_create_poll();
+}
+
+function hide_poll_results() {
+  document.getElementById('show-poll-results').style.display = 'none';
 }
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js","bn.js":"../node_modules/bn.js/lib/bn.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
