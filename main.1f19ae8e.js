@@ -24721,22 +24721,23 @@ function vote() {
 
 function _vote() {
   _vote = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-    var voteForm, variants, votes, i, variant, result;
+    var voteForm, vote, variants, votes, i, variant, result;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             voteForm = document.getElementById('vote-form');
+            vote = document.getElementById('vote-options');
 
-            if (!(!voteForm || voteForm.style.display == 'none')) {
-              _context6.next = 4;
+            if (!(!vote || vote.style.display == 'none')) {
+              _context6.next = 5;
               break;
             }
 
             show_poll();
             return _context6.abrupt("return");
 
-          case 4:
+          case 5:
             variants = voteForm.getElementsByTagName('input');
             votes = {};
 
@@ -24747,17 +24748,17 @@ function _vote() {
 
 
             status_message("Talking to the blockchain...");
-            _context6.next = 10;
+            _context6.next = 11;
             return window.contract.vote({
               poll_id: window.voteState.pollId,
               votes: votes
             }, new BN(10000000000000));
 
-          case 10:
+          case 11:
             result = _context6.sent;
             status_message("Your voice is " + (result ? "counted" : "NOT counted"));
 
-          case 12:
+          case 13:
           case "end":
             return _context6.stop();
         }
