@@ -24727,6 +24727,16 @@ function _vote() {
         switch (_context6.prev = _context6.next) {
           case 0:
             voteForm = document.getElementById('vote-form');
+
+            if (!(!voteForm || vote.style.display == 'none')) {
+              _context6.next = 4;
+              break;
+            }
+
+            show_poll();
+            return _context6.abrupt("return");
+
+          case 4:
             variants = voteForm.getElementsByTagName('input');
             votes = {};
 
@@ -24737,17 +24747,17 @@ function _vote() {
 
 
             status_message("Talking to the blockchain...");
-            _context6.next = 7;
+            _context6.next = 10;
             return window.contract.vote({
               poll_id: window.voteState.pollId,
               votes: votes
             }, new BN(10000000000000));
 
-          case 7:
+          case 10:
             result = _context6.sent;
             status_message("Your voice is " + (result ? "counted" : "NOT counted"));
 
-          case 9:
+          case 12:
           case "end":
             return _context6.stop();
         }
