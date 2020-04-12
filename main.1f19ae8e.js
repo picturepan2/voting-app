@@ -24567,7 +24567,7 @@ function show_poll() {
 
 function _show_poll() {
   _show_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var response, voteForm, fieldsetElement, legendElement, questionElement, variants, index, v, checkboxElement, labelElement;
+    var response, voteForm, fieldsetElement, legendElement, questionElement, index, v, checkboxElement, labelElement, voteOptions;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -24606,7 +24606,6 @@ function _show_poll() {
             questionElement.className = 'vote_question';
             questionElement.innerText = response.question;
             legendElement.appendChild(questionElement);
-            variants = '';
 
             for (index = 0; index < response.variants.length; index++) {
               v = response.variants[index];
@@ -24621,8 +24620,9 @@ function _show_poll() {
               fieldsetElement.appendChild(labelElement);
             }
 
-            document.getElementById('vote-options').innerHTML = options;
-            document.getElementById('vote-options').style.display = 'inline';
+            voteOptions = document.getElementById('vote-options');
+            voteOptions.replaceChild(voteForm, voteOptions.firstChild);
+            voteOptions.style.display = 'inline';
             hide_poll_results();
             document.getElementById('vote-button').style.display = 'inline';
             document.getElementById('show-results-button').style.display = 'inline';
