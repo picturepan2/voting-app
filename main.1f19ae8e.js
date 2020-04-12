@@ -24818,13 +24818,13 @@ function hide_create_poll() {
 }
 
 function show_poll_results() {
-  document.getElementById('show-poll-results').style.display = 'block';
+  document.getElementById('poll-results-form"').style.display = 'block';
   hide_create_poll();
   hide_poll_variants();
 }
 
 function hide_poll_results() {
-  document.getElementById('show-poll-results').style.display = 'none';
+  document.getElementById('poll-results-form"').style.display = 'none';
 }
 
 function status_message(text) {
