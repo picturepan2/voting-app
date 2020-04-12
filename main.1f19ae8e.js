@@ -24620,6 +24620,8 @@ function _show_poll() {
               fieldsetElement.appendChild(labelElement);
             }
 
+            voteForm.appendChild(legendElement);
+            voteForm.appendChild(fieldsetElement);
             voteOptions = document.getElementById('vote-options');
             voteOptions.replaceChild(voteForm, voteOptions.firstChild);
             voteOptions.style.display = 'inline';
@@ -24627,7 +24629,7 @@ function _show_poll() {
             document.getElementById('vote-button').style.display = 'inline';
             document.getElementById('show-results-button').style.display = 'inline';
 
-          case 24:
+          case 26:
           case "end":
             return _context3.stop();
         }
