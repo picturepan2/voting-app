@@ -24542,10 +24542,15 @@ function signedInFlow() {
   });
   document.getElementById('show-results-button').addEventListener('click', function () {
     show_vote_results();
-  }); // Adding an event to create vote.
-
+  });
   document.getElementById('create-poll-button').addEventListener('click', function () {
     show_create_poll();
+  });
+  document.getElementById('create-poll-add-variant').addEventListener('click', function () {
+    add_poll_variant();
+  });
+  document.getElementById('create-poll-remove-variant').addEventListener('click', function () {
+    remove_poll_variant();
   });
   document.getElementById('create-poll-submit').addEventListener('click', function () {
     create_poll();
@@ -24796,6 +24801,27 @@ function status_message(text) {
 function hide_poll_variants() {
   var vote = document.getElementById('vote-options');
   if (vote) vote.style.display = 'none';
+}
+
+function add_poll_variant() {
+  var newPollList = document.getElementById('new-poll-variants');
+  var index = newPollList.childElementCount + 1;
+  var newVariantId = "new-poll-v" + index;
+  var newVariantInput = document.createElement("input");
+  newVariantInput.type = 'text';
+  newVariantInput.id = newVariantId;
+  var newVariantLabel = document.createElement("label");
+  newVariantLabel.innerText = 'Variant ' + index;
+  newVariantLabel.for = newVariantId;
+  var newVariant = document.createElement("li");
+  newVariant.appendChild(newVariantLabel);
+  newVariant.appendChild(newVariantInput);
+  newPollList.appendChild(newVariant);
+}
+
+function remove_poll_variant() {
+  var newPollList = document.getElementById('new-poll-variants');
+  newPollList.removeChild(newPollList.lastChild);
 }
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js","bn.js":"../node_modules/bn.js/lib/bn.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
