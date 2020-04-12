@@ -24675,7 +24675,7 @@ function _show_poll_results() {
 
             for (index = 0; index < response.poll.variants.length; index++) {
               variantItem = document.createElement('div');
-              variantItem.class = 'vote_options';
+              variantItem.className = 'vote_options';
               variantItem.innerText = format_variant(response.poll, response.results, index);
               newHolder.appendChild(variantItem);
             }
