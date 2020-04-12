@@ -24670,7 +24670,9 @@ function _show_poll_results() {
             questionItem = document.createElement('div');
             questionItem.id = 'result-poll-question';
             questionItem.class = 'vote_question';
+            questionItem.innerText = response.poll.question;
             newHolder.appendChild(questionItem);
+            window.confirm.log(response.results);
 
             for (index = 0; index < response.results.length; index++) {
               variantItem = document.createElement('div');
@@ -24690,7 +24692,7 @@ function _show_poll_results() {
             resultsForm.replaceChild(newHolder, resultsForm.firstElementChild);
             document.getElementById('vote-options').style.display = 'none';
 
-          case 27:
+          case 29:
           case "end":
             return _context4.stop();
         }
