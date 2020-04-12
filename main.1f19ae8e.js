@@ -24618,6 +24618,7 @@ function _show_poll() {
               labelElement.innerText = v.message;
               fieldsetElement.appendChild(checkboxElement);
               fieldsetElement.appendChild(labelElement);
+              fieldsetElement.appendChild(document.createElement('br'));
             }
 
             voteForm.appendChild(legendElement);
