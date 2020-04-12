@@ -24672,7 +24672,7 @@ function _show_poll_results() {
             questionItem.class = 'vote_question';
             questionItem.innerText = response.poll.question;
             newHolder.appendChild(questionItem);
-            window.console.log(response.results);
+            window.console.log(response.poll);
 
             for (index = 0; index < response.results.length; index++) {
               variantItem = document.createElement('div');
