@@ -24685,8 +24685,8 @@ function _show_poll_results() {
             votedItem.class = 'voted';
             votedItem.innerText = Object.keys(response.results.voted).join(" ");
             newHolder.appendChild(votedItem);
+            console.log(newHolder);
             resultsForm = document.getElementById('poll-results-form');
-            window.console.log(resultsForm.firstElementChild);
             resultsForm.replaceChild(newHolder, resultsForm.firstElementChild);
             document.getElementById('vote-options').style.display = 'none';
 
