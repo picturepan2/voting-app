@@ -24804,7 +24804,7 @@ function hide_poll_variants() {
 }
 
 function add_poll_variant() {
-  var newPollList = document.getElementById('new-poll-variants');
+  var newPollList = document.getElementById('new-poll-form-variants');
   var index = newPollList.childElementCount + 1;
   var newVariantId = "new-poll-v" + index;
   var newVariantInput = document.createElement("input");
@@ -24820,7 +24820,7 @@ function add_poll_variant() {
 }
 
 function remove_poll_variant() {
-  var newPollList = document.getElementById('new-poll-variants');
+  var newPollList = document.getElementById('new-poll-form-variants');
   newPollList.removeChild(newPollList.lastChild);
 }
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","nearlib":"../node_modules/nearlib/lib/index.js","./config":"config.js","bn.js":"../node_modules/bn.js/lib/bn.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
