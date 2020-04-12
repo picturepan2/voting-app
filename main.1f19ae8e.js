@@ -24663,7 +24663,7 @@ function _show_poll_results() {
             return _context4.abrupt("return");
 
           case 9:
-            document.getElementById('poll-results-form"').style.display = 'block';
+            document.getElementById('poll-results-form').style.display = 'block';
             hide_create_poll();
             hide_poll_variants();
             newHolder = document.createElement('div');
