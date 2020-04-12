@@ -24541,7 +24541,7 @@ function signedInFlow() {
     }
   });
   document.getElementById('show-results-button').addEventListener('click', function () {
-    show_vote_results();
+    show_poll_results();
   });
   document.getElementById('create-poll-button').addEventListener('click', function () {
     show_create_poll();
@@ -24626,12 +24626,12 @@ function format_variant(poll, results, index) {
   return poll.variants[index].message + ' -> ' + (voted ? voted : 0);
 }
 
-function show_vote_results() {
-  return _show_vote_results.apply(this, arguments);
+function show_poll_results() {
+  return _show_poll_results.apply(this, arguments);
 }
 
-function _show_vote_results() {
-  _show_vote_results = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+function _show_poll_results() {
+  _show_poll_results = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
     var response, newHolder, questionItem, index, variantItem, votedItem, resultsForm;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
@@ -24663,7 +24663,9 @@ function _show_vote_results() {
             return _context4.abrupt("return");
 
           case 9:
-            show_poll_results();
+            document.getElementById('poll-results-form"').style.display = 'block';
+            hide_create_poll();
+            hide_poll_variants();
             newHolder = document.createElement('div');
             questionItem = document.createElement('div');
             questionItem.id = 'result-poll-question';
@@ -24687,14 +24689,14 @@ function _show_vote_results() {
             resultsForm.replaceChild(resultsForm.firstChild, newHolder);
             document.getElementById('vote-options').style.display = 'none';
 
-          case 24:
+          case 26:
           case "end":
             return _context4.stop();
         }
       }
     }, _callee4);
   }));
-  return _show_vote_results.apply(this, arguments);
+  return _show_poll_results.apply(this, arguments);
 }
 
 function create_poll() {
@@ -24817,14 +24819,8 @@ function hide_create_poll() {
   newPollForm.style.display = 'none';
 }
 
-function show_poll_results() {
-  document.getElementById('poll-results-form"').style.display = 'block';
-  hide_create_poll();
-  hide_poll_variants();
-}
-
 function hide_poll_results() {
-  document.getElementById('poll-results-form"').style.display = 'none';
+  document.getElementById('poll-results-form').style.display = 'none';
 }
 
 function status_message(text) {
