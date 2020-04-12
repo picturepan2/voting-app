@@ -24686,10 +24686,11 @@ function _show_poll_results() {
             votedItem.innerText = Object.keys(response.results.voted).join(" ");
             newHolder.appendChild(votedItem);
             resultsForm = document.getElementById('poll-results-form');
+            window.console.log(resultsForm.firstElementChild);
             resultsForm.replaceChild(resultsForm.firstElementChild, newHolder);
             document.getElementById('vote-options').style.display = 'none';
 
-          case 26:
+          case 27:
           case "end":
             return _context4.stop();
         }
