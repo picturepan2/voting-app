@@ -24669,10 +24669,9 @@ function _show_poll_results() {
             newHolder = document.createElement('div');
             questionItem = document.createElement('div');
             questionItem.id = 'result-poll-question';
-            questionItem.class = 'vote_question';
+            questionItem.className = 'vote_question';
             questionItem.innerText = response.poll.question;
             newHolder.appendChild(questionItem);
-            window.console.log(response);
 
             for (index = 0; index < response.poll.variants.length; index++) {
               variantItem = document.createElement('div');
@@ -24683,15 +24682,15 @@ function _show_poll_results() {
 
             votedItem = document.createElement('div');
             votedItem.id = 'result-poll-voted';
-            votedItem.class = 'voted';
-            votedItem.innerText = Object.keys(response.results.voted).join(" ");
+            votedItem.className = 'voted';
+            votedItem.innerText = 'Voted: ' + Object.keys(response.results.voted).join(" ");
             newHolder.appendChild(votedItem);
             console.log(newHolder);
             resultsForm = document.getElementById('poll-results-form');
             resultsForm.replaceChild(newHolder, resultsForm.firstElementChild);
             document.getElementById('vote-options').style.display = 'none';
 
-          case 29:
+          case 28:
           case "end":
             return _context4.stop();
         }
