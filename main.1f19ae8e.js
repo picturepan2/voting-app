@@ -24813,7 +24813,7 @@ function _vote() {
 
           case 7:
             result = _context6.sent;
-            status_message("Your voice is " + (result ? "counted" : "NOT counted"));
+            status_message("Your voice is " + (result ? "counted" : "NOT counted, already voted?"));
 
           case 9:
           case "end":
