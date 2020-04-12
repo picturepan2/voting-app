@@ -24687,7 +24687,7 @@ function _show_poll_results() {
             newHolder.appendChild(votedItem);
             resultsForm = document.getElementById('poll-results-form');
             window.console.log(resultsForm.firstElementChild);
-            resultsForm.replaceChild(resultsForm.firstElementChild, newHolder);
+            resultsForm.replaceChild(newHolder, resultsForm.firstElementChild);
             document.getElementById('vote-options').style.display = 'none';
 
           case 27:
