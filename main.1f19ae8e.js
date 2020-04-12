@@ -24632,7 +24632,7 @@ function show_vote_results() {
 
 function _show_vote_results() {
   _show_vote_results = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var response, voted;
+    var response, newHolder, questionItem, index, variantItem, votedItem, resultsForm;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
@@ -24664,15 +24664,30 @@ function _show_vote_results() {
 
           case 9:
             show_poll_results();
-            document.getElementById('result-poll-question').innerText = response.poll.question;
-            document.getElementById('result-poll-v1').innerText = format_variant(response.poll, response.results, 0);
-            document.getElementById('result-poll-v2').innerText = format_variant(response.poll, response.results, 1);
-            document.getElementById('result-poll-v3').innerText = format_variant(response.poll, response.results, 2);
-            voted = Object.keys(response.results.voted).join(" ");
-            document.getElementById('result-poll-voted').innerText = voted;
+            newHolder = document.createElement('div');
+            questionItem = document.createElement('div');
+            questionItem.id = 'result-poll-question';
+            questionItem.class = 'vote_question';
+            newHolder.appendChild(questionItem);
+
+            for (index = 0; index < response.results.length; index++) {
+              variantItem = document.createElement('div');
+              variantItem.class = 'vote_options';
+              variantItem.id = 'result-poll-v' + (index + 1);
+              variantItem.innerText = format_variant(response.poll, response.results, index);
+              newHolder.appendChild(variantItem);
+            }
+
+            votedItem = document.createElement('div');
+            votedItem.id = 'result-poll-voted';
+            votedItem.class = 'voted';
+            votedItem.innerText = Object.keys(response.results.voted).join(" ");
+            newHolder.appendChild(votedItem);
+            resultsForm = document.getElementById('poll-results-form');
+            resultsForm.replaceChild(resultsForm.firstChild, newHolder);
             document.getElementById('vote-options').style.display = 'none';
 
-          case 17:
+          case 24:
           case "end":
             return _context4.stop();
         }
@@ -24688,28 +24703,46 @@ function create_poll() {
 
 function _create_poll() {
   _create_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-    var question, v1, v2, v3, poll, base, poll_address;
+    var question, index, variants, v, poll, base, poll_address;
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             question = document.getElementById("new-poll-question").value;
-            v1 = document.getElementById("new-poll-v1").value;
-            v2 = document.getElementById("new-poll-v2").value;
-            v3 = document.getElementById("new-poll-v3").value; // Creation of poll and voting need more gas to execute.
+            index = 1;
+            variants = {};
 
-            status_message("Talking to the blockchain...");
-            _context5.next = 7;
-            return window.contract.create_poll({
-              question: question,
-              variants: {
-                v1: v1,
-                v2: v2,
-                v3: v3
-              }
-            }, new BN(10000000000000));
+          case 3:
+            if (!true) {
+              _context5.next = 11;
+              break;
+            }
+
+            v = document.getElementById("new-poll-v" + index);
+
+            if (v) {
+              _context5.next = 7;
+              break;
+            }
+
+            return _context5.abrupt("break", 11);
 
           case 7:
+            variants['v' + index] = v.value;
+            index++;
+            _context5.next = 3;
+            break;
+
+          case 11:
+            // Creation of poll and voting need more gas to execute.
+            status_message("Talking to the blockchain...");
+            _context5.next = 14;
+            return window.contract.create_poll({
+              question: question,
+              variants: variants
+            }, new BN(10000000000000));
+
+          case 14:
             poll = _context5.sent;
             status_message("Ready, created " + poll);
             base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
@@ -24717,7 +24750,7 @@ function _create_poll() {
             document.getElementById("new-poll-address").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
             hide_create_poll();
 
-          case 13:
+          case 20:
           case "end":
             return _context5.stop();
         }
@@ -24811,7 +24844,7 @@ function add_poll_variant() {
   newVariantInput.type = 'text';
   newVariantInput.id = newVariantId;
   var newVariantLabel = document.createElement("label");
-  newVariantLabel.innerText = 'Variant ' + index;
+  newVariantLabel.innerText = 'Variant ' + index + ': ';
   newVariantLabel.for = newVariantId;
   var newVariant = document.createElement("li");
   newVariant.appendChild(newVariantLabel);
