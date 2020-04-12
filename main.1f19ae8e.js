@@ -24567,7 +24567,7 @@ function show_poll() {
 
 function _show_poll() {
   _show_poll = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var response, variants, index, v, options;
+    var response, voteForm, fieldsetElement, legendElement, questionElement, variants, index, v, checkboxElement, labelElement;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -24597,21 +24597,37 @@ function _show_poll() {
             return _context3.abrupt("return");
 
           case 8:
+            voteForm = document.createElement('div');
+            voteForm.id = 'vote-form';
+            fieldsetElement = document.createElement('fieldset');
+            legendElement = document.createElement('legend');
+            legendElement.innerText = "Dear @" + window.accountId + " please vote on poll by @" + response.creator;
+            questionElement = document.createElement('div');
+            questionElement.className = 'vote_question';
+            questionElement.innerText = response.question;
+            legendElement.appendChild(questionElement);
             variants = '';
 
             for (index = 0; index < response.variants.length; index++) {
               v = response.variants[index];
-              variants += '<input type="checkbox" id="' + v.option_id + '" value="' + v.option_id + '">' + '<label for="' + v.option_id + '">' + v.message + '</label><br>';
+              checkboxElement = document.createElement('input');
+              checkboxElement.type = 'checkbox';
+              checkboxElement.id = v.option_id;
+              checkboxElement.value = v.option_id;
+              labelElement = document.createElement('label');
+              labelElement.for = v.option_id;
+              labelElement.innerText = v.message;
+              fieldsetElement.appendChild(checkboxElement);
+              fieldsetElement.appendChild(labelElement);
             }
 
-            options = '<form id="vote-form">' + '<fieldset>' + '<legend>' + "Dear @" + window.accountId + " please vote on poll by @" + response.creator + " <br/>" + '<div class="vote_question">' + response.question + "</div>" + '</legend>' + variants + '</fieldset>' + '</form>';
             document.getElementById('vote-options').innerHTML = options;
             document.getElementById('vote-options').style.display = 'inline';
             hide_poll_results();
             document.getElementById('vote-button').style.display = 'inline';
             document.getElementById('show-results-button').style.display = 'inline';
 
-          case 16:
+          case 24:
           case "end":
             return _context3.stop();
         }
