@@ -163,7 +163,7 @@ function format_variant(poll, results, index) {
 
 async function show_poll_results() {
     if (!window.voteState.pollId) return;
-    status_message("Talking to the blockchain...");
+    status_message("Talking to NEAR...");
     const response = await window.contract.show_results({ poll_id: window.voteState.pollId } );
     status_message("Ready!");
     if (!response) {
@@ -213,7 +213,7 @@ async function create_poll() {
         index++;
     }
     // Creation of poll and voting need more gas to execute.
-    status_message("Talking to the blockchain...");
+    status_message("Talking to NEAR...");
     const poll = await window.contract.create_poll({question: question, variants: variants},
         new BN(10000000000000));
     status_message("Ready, created " + poll);
@@ -232,7 +232,7 @@ async function vote() {
         votes[variant.id] = variant.checked ? 1 : 0 ;
     }
     // Creation of poll and voting needs more gas to execute.
-    status_message("Talking to the blockchain...");
+    status_message("Talking to NEAR...");
     const result = await window.contract.vote({poll_id: window.voteState.pollId, votes: votes},
         new BN(10000000000000));
     status_message("Your voice is " + (result ? "counted" : "NOT counted, already voted?"));
@@ -276,8 +276,9 @@ function add_poll_variant() {
     const newVariantInput = document.createElement("input");
     newVariantInput.type = 'text';
     newVariantInput.id = newVariantId;
+    newVariantInput.className = 'form-input';
     const newVariantLabel = document.createElement("label");
-    newVariantLabel.innerText = 'Variant ' + index + ': ';
+    newVariantLabel.innerText = 'Option ' + index + ': ';
     newVariantLabel.for = newVariantId;
     const newVariant = document.createElement("li");
     newVariant.appendChild(newVariantLabel);

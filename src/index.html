@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>NEAR Voting App</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="assets/spectre.min.css">
   <style>
     .App-header {
       background-image: url('https://nearprotocol.com/wp-content/uploads/2019/03/illo-developers.svg');
@@ -13,22 +17,23 @@
       justify-content: center;
       font-size: 1rem;
       color: #25282A;
-      text-align: center;
-      padding:2%;
+      padding: 2%;
     }
+
     .image-wrapper {
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
     }
+
     .App-logo {
       animation: App-logo-spin infinite 20s linear;
       pointer-events: none;
     }
 
     .margin-logo {
-      margin: 20px;
+      margin: 2rem;
     }
 
     @keyframes App-logo-spin {
@@ -40,83 +45,87 @@
       }
     }
 
-    button {
-      padding: 5px;
-      color: #0072CE;
-      border-radius: 10px;
-      border: 3px solid #0072CE;
-    }
-
-    button:hover {
-      cursor: pointer;
-      color: white;
-      background: #0072CE;
-    }
-
     .vote_question {
       font-size: 3.5rem;
       color: #0072CE;
-      text-shadow: 1px 1px #D1CCBD;
     }
+
     .vote_options {
-      font-size: 2.0rem;
+      font-size: 2rem;
       color: #5acf8b;
-      text-shadow: 1px 1px #D1CCBD;
     }
+
     .voted {
-      font-size: 1.0rem;
+      font-size: 1rem;
       color: #ce501e;
-      text-shadow: 1px 1px #D1CCBD;
     }
+
     .status_message {
-      font-size: 1.0rem;
-      color: #24128b;
+      font-size: 1rem;
     }
+
     .page_header {
-      font-size: 3.0rem;
-      color: #128b36;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    #new-poll-form-variants {
+      margin: 0 0 2rem 0;
+    }
+
+    #new-poll-form-variants li {
+      text-align: left;
+    }
+
+    #signed-in-flow {
+      margin-top: 2rem;
     }
   </style>
 </head>
-<body class="App-header">
-  <div>
+<body class="App-header container grid-xs text-center">
+  <div class="columns">
+    <div class="column">
       <div class="image-wrapper">
         <img style="width:33%;" src="assets/gray_near_logo.svg" alt="NEAR logo" />
-        <p><span role="img" aria-label="fish">🐟</span> NEAR protocol is a new blockchain focused on developer productivity and useability!<span role="img" aria-label="fish">🐟</span></p>
-        <p class="page_header"><span role="img" aria-label="chain">⛓</span> NEAR Secure Voting Service</p>
-        <img src="assets/near.svg" class="App-logo margin-logo" alt="logo" />
+        <p><span role="img" aria-label="fish">🝟</span> NEAR protocol is a new blockchain focused on developer productivity and useability!<span role="img" aria-label="fish">🝟</span></p>
+        <p class="page_header text-primary">NEAR Voting Service</p>
         <div id="vote-options" class="vote_options">
           <div></div>
         </div>
       </div>
       <div id="signed-out-flow" class="d-none">
-        <button id="sign-in-button" >Sign-in with NEAR</button>
+        <button id="sign-in-button" class="btn btn-primary">Sign-in with NEAR</button>
       </div>
-      <div id="new-poll-form" style="display: none;">
-        <label for="new-poll-question">Poll question:</label><input type="text" id="new-poll-question"><br/>
+      <div id="new-poll-form" style="display: none;" class="form">
+        <div class="form-group text-left">
+          <label for="new-poll-question" class="form-label">Poll question:</label>
+          <input type="text" id="new-poll-question" class="form-input">
+        </div>
         <ul id="new-poll-form-variants">
           <li>
-            <label for="new-poll-v1">Variant 1: </label><input type="text" id="new-poll-v1">
+            <label for="new-poll-v1">Option 1: </label><input type="text" id="new-poll-v1" class="form-input">
           </li>
         </ul>
-        <button id="create-poll-submit">Submit</button>
-        <button id="create-poll-add-variant">Add variant</button>
-        <button id="create-poll-remove-variant">Remove variant</button>
-        <button id="create-poll-cancel">Cancel</button>
+        <div class="form-group">
+          <button id="create-poll-submit" class="btn btn-primary">Submit</button>
+          <button id="create-poll-add-variant" class="btn btn-primary">Add option</button>
+          <button id="create-poll-remove-variant" class="btn">Remove option</button>
+          <button id="create-poll-cancel" class="btn">Cancel</button>
+        </div>
       </div>
       <div id="poll-results-form" style="display: none;">
         <div></div>
       </div>
       <div id="signed-in-flow" class="d-none">
-          <button id="create-poll-button">Create poll</button>
-          <button id="vote-button" style='display: none;'>Vote</button>
-          <button id="show-results-button" style='display: none;'>Show results</button>
-          <button id="sign-out-button">Sign-out</button>
-          <div id="new-poll-address"></div>
+        <button id="create-poll-button" class="btn btn-primary">Create poll</button>
+        <button id="vote-button" style='display: none;' class="btn btn-primary">Vote</button>
+        <button id="show-results-button" style='display: none;' class="btn btn-primary">Show results</button>
+        <button id="sign-out-button" class="btn">Sign-out</button>
+        <div id="new-poll-address"></div>
       </div>
-      <div id="status-message-bar" class="status_message">
-        Ready!
+      <div id="status-message-bar" class="status_message mt-2">
       </div>
+    </div>
   </div>
   <script src="./main.js"></script>
 </body>
