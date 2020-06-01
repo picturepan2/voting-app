@@ -124,11 +124,13 @@ async function show_poll() {
     }
     const voteForm = document.createElement('div');
     voteForm.id = 'vote-form';
-    const fieldsetElement = document.createElement('fieldset');
-    const legendElement = document.createElement('legend');
-    legendElement.innerText = "Dear @" + window.accountId + " please vote on poll by @" + response.creator;
+    const fieldsetElement = document.createElement('div');
+    fieldsetElement.className = 'vote_option_items'
+    const legendElement = document.createElement('div');
+    legendElement.className = 'vote_question'
+    legendElement.innerText = "Please vote on the poll created by @" + response.creator;
     const questionElement = document.createElement('div');
-    questionElement.className = 'vote_question';
+    questionElement.className = 'vote_question_title text-primary';
     questionElement.innerText = response.question;
     legendElement.appendChild(questionElement);
 
@@ -165,7 +167,7 @@ async function show_poll_results() {
     if (!window.voteState.pollId) return;
     status_message("Talking to NEAR...");
     const response = await window.contract.show_results({ poll_id: window.voteState.pollId } );
-    status_message("Ready!");
+    status_message("");
     if (!response) {
         return;
     }
@@ -177,7 +179,7 @@ async function show_poll_results() {
     const newHolder = document.createElement('div');
     const questionItem = document.createElement('div');
     questionItem.id = 'result-poll-question';
-    questionItem.className = 'vote_question';
+    questionItem.className = 'vote_question text-primary';
     questionItem.innerText = response.poll.question;
     newHolder.appendChild(questionItem);
 
@@ -190,7 +192,7 @@ async function show_poll_results() {
     }
     const votedItem = document.createElement('div');
     votedItem.id = 'result-poll-voted';
-    votedItem.className = 'voted';
+    votedItem.className = 'voted text-success';
     votedItem.innerText = 'Voted: ' + Object.keys(response.results.voted).join(" ");
     newHolder.appendChild(votedItem);
 
@@ -216,10 +218,9 @@ async function create_poll() {
     status_message("Talking to NEAR...");
     const poll = await window.contract.create_poll({question: question, variants: variants},
         new BN(10000000000000));
-    status_message("Ready, created " + poll);
     const base = document.documentURI.substr(0, document.documentURI.lastIndexOf('/'));
     const poll_address = base + "/?poll_id=" + poll;
-    document.getElementById("new-poll-address").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
+    document.getElementById("status-message-bar").innerHTML = 'Newly created poll at <a href="' + poll_address + '">' + poll_address + '</a>';
     hide_create_poll();
 }
 
